@@ -12,7 +12,11 @@
         <h1>TO-DO LIST APP</h1>
         <input type="text" id="taskInput" placeholder="---Task to be done---">
         <button id="push">Add</button>
+        
     </div>
+    <div id="searchbox">
+    <input type="text" id="searchInput" placeholder="Search tasks...">
+</div>
 
     <div id="tasks"></div>
 </div>
@@ -60,6 +64,21 @@
             }
         });
     });
+    document.getElementById("searchInput").addEventListener("keyup", function () {
+    let filter = this.value.toLowerCase();
+    let tasks = document.querySelectorAll(".task");
+
+    tasks.forEach(function (task) {
+        let text = task.querySelector("span").innerText.toLowerCase();
+
+        if (text.includes(filter)) {
+            task.style.display = "flex";
+        } else {
+            task.style.display = "none";
+        }
+    });
+});
+
 </script>
 
 </body>
