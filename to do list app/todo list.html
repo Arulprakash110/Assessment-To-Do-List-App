@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+    <title>Todo App</title>
+
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <div id="newtask">
+        <h1>TO-DO LIST APP</h1>
+        <input type="text" id="taskInput" placeholder="---Task to be done---">
+        <button id="push">Add</button>
+    </div>
+
+    <div id="tasks"></div>
+</div>
+
+
+<script>
+    document.getElementById("push").addEventListener("click", function () {
+
+        let input = document.getElementById("taskInput");
+
+        if (input.value.trim() === "") {
+            alert("Please enter a task");
+            return;
+        }
+
+        let taskDiv = document.createElement("div");
+        taskDiv.classList.add("task");
+
+        taskDiv.innerHTML = `
+            <div class="task-left">
+                <input type="checkbox" class="complete">
+                <span>${input.value}</span>
+            </div>
+            <button class="delete">X</button>
+        `;
+
+        document.getElementById("tasks").appendChild(taskDiv);
+
+        input.value = "";
+
+        
+        taskDiv.querySelector(".delete").addEventListener("click", function () {
+            taskDiv.remove();
+        });
+
+        
+        let checkbox = taskDiv.querySelector(".complete");
+        let text = taskDiv.querySelector("span");
+
+        checkbox.addEventListener("change", function () {
+            if (checkbox.checked) {
+                text.classList.add("completed");
+            } else {
+                text.classList.remove("completed");
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
